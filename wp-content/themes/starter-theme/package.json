@@ -1,0 +1,18 @@
+{
+  "name": "starter-theme",
+  "version": "1.0.0",
+  "description": "This is a starter theme using roots/sage w webpack",
+  "author": "James Gordon",
+  "license": "1.0.0",
+  "keywords": [
+    "WordPress",
+    "Theme"
+  ],
+  "homepage": "https://github.com/iamjamesgordon/wp-boilerplate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamjamesgordon/wp-boilerplate.git"
+  },
+  "devDependencies": {},
+  "scripts": {}
+}
