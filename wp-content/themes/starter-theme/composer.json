@@ -44,6 +44,7 @@
   },
   "require-dev": {
     "10up/wp_mock": "0.5.0",
+    "friendsofphp/php-cs-fixer": "3.49",
     "laravel/pint": "^1.13",
     "phpunit/phpunit": "9.6"
   },
