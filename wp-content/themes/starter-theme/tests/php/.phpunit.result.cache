@@ -1,0 +1,1 @@
+{"version":1,"defects":{"SampleWithWPMockTest::testMyFunction":3},"times":{"SampleTest::test_sample":0.001,"SampleWithWPMockTest::testMyFunction":0.005}}

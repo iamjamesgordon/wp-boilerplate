@@ -43,7 +43,9 @@
     "roots/acorn": "^3.3"
   },
   "require-dev": {
-    "laravel/pint": "^1.13"
+    "10up/wp_mock": "0.5.0",
+    "laravel/pint": "^1.13",
+    "phpunit/phpunit": "9.6"
   },
   "suggest": {
     "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0)."
