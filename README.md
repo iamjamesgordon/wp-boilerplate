@@ -48,3 +48,23 @@ Each variable under the **Docker Variables** header should be set
 
 **Run following commands if containers already exist**
 - docker-compose up
+
+# Scripts
+For consistency and simplifying the development experience scripts have been created for the regular tasks.
+
+## Testing
+For testing access the starter-theme folder and run the command below in the command line. This will access all the tests in the tests/ folder with the ext spec.php
+- script/tests.sh
+
+## Linting
+To format the php code and apply consistency to the formatting, access the starter-theme folder
+- script/linting.sh
+
+## WordPress Docker Container - WP-CLU
+To be able to run the commands necessary for the Roots/Acorn you need to access the WordPress docker container. Run the command below in the root of the repo.
+- script/wp-cli.sh
+- The necessary Roots/Acorn commands are here - https://roots.io/acorn/docs/wp-cli/
+
+## HTML Generator
+The HTML Generator allows you to see generator a html file for each sass component. Each file is viewable with the component's html snippet in the body. There is an example component named _testComp.scss with the html snippet as a comment. If there is no html snippet wrapped with /* HTML-BUILDER it will be ignored and no html file created for it.
+- script/html-generator.sh
