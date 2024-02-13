@@ -32,7 +32,8 @@
     }
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js && node scripts/html-generator",
+    "html": "node scripts/html-generator",
     "watch": "npm-watch build"
   }
 }
