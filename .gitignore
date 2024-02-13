@@ -6,6 +6,3 @@ wp-content/plugins/akismet
 wp-content/plugins/hello.php
 wp-content/plugins/index.php
 wp-content/index.php
-
-# Removing Sage cache folder
-wp-content/cache
