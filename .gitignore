@@ -1,5 +1,6 @@
 # Removing default themes and plugin files
 wp-content/themes/twentytwentyfour
+wp-content/themes/twentytwentythree
 wp-content/themes/twentytwentytwo
 wp-content/themes/index.php
 wp-content/plugins/akismet
