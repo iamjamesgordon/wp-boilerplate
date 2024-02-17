@@ -38,6 +38,15 @@
       "App\\": "app/"
     }
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*"
+      ]
+    }
+  ],
   "require": {
     "php": ">=8.1",
     "roots/acorn": "^3.3"
@@ -54,7 +63,10 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -63,6 +75,12 @@
       "providers": [
         "App\\Providers\\ThemeServiceProvider",
         "App\\Providers\\AssetsProvider"
+      ]
+    },
+    "installer-paths": {
+      "../../mu-plugins/{$name}/": [],
+      "../../plugins/{$name}/": [
+        "type:wordpress-plugin"
       ]
     }
   }
