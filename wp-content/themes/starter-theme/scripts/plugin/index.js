@@ -21,48 +21,40 @@ readFile(composer, (error, data) => {
     const requiredProp = parsedData.required;
     const installerPathProp = parsedData.extra['installer-paths'];
 
-    console.log("Plugin check below:");
-    console.log(check(parsedData, 'require', plugin));
-
+    // If task is REQUIRE
     if(action == "require") {
 
         // Check the require property if the 'plugin' exists
         // If so do nothing else add plugin to the 'require' property inside json (parsedData)
         if (!check(parsedData, 'require', plugin))
-            parsedData = update(parsedData, action, 'require', plugin, version);
+            parsedData = update(parsedData, 'require', 'require', plugin, version);
 
-        parsedData = must_use ? update(parsedData, action, '', plugin, version, true) : update(parsedData, action, '', plugin, version);
-
-    }
-
-    if(action == "remove") {
-
-        if (check(parsedData, false, plugin))
-            parsedData = update(parsedData, action, 'require', plugin, version);
-
-        parsedData = check(parsedData, false, plugin, true) ? update(parsedData, action, '', plugin, version, true) : update(parsedData, action, '', plugin, version);
+        // Check if plugin exists in both of the installer-paths
+        // If it doesn't then check if musu_use has been passed
+        if (!check(parsedData, false, plugin, must_use) && !check(parsedData, false, plugin, false))
+            parsedData = must_use ? update(parsedData, action, false, plugin, version, true) : update(parsedData, action, false, plugin, version);
 
     }
-
-    console.log("MU Plugins");
-    console.log(parsedData.extra['installer-paths']['../../mu-plugins/{$name}/']);
-    console.log("Plugins");
-    console.log(parsedData.extra['installer-paths']['../../plugins/{$name}/']);
-    // If task is REQUIRE
-    // Check if the package is in the 'require' in composer.json
-    //  - If it is not then update parsedData
-    //  - If it is then do nothing
-    // Check if the package is in the 'installer-path' in composer.json
-    //  - If its in the installer path do nothing
-    //  - If its NOT in the installer path then add it
 
     // If task is REMOVE
-    // Check if the package is in the 'require' in composer.json
-    //  - If it is not then do nothing
-    //  - If it is then removing from installer path
-    // Check if the package is in the 'installer-path' in composer.json
-    //  - If it is not then do nothing
-    //  - If it is then removing from installer path
+    if(action == "remove") {
+
+        // Check if plugin exists in the require
+        // If it does then do update the json
+        if (check(parsedData, 'require', plugin))
+            parsedData = update(parsedData, action, 'require', plugin, version);
+
+        // Check if plugin exists in the installer-path must use
+        // If it does then do update the json by removing from installer-path mu-plugin
+        if(check(parsedData, false, plugin, true))
+            parsedData = update(parsedData, action, '', plugin, '', true);
+
+        // Check if plugin exists in the installer-path
+        // If it does then do update the json by removing from installer-path plugin
+        if (check(parsedData, false, plugin, false))
+            parsedData = update(parsedData, action, '', plugin, '', false);
+
+    }
 
     writeFile(composer, JSON.stringify(parsedData, null, 2), (err) => {
         if (err) {
@@ -71,4 +63,5 @@ readFile(composer, (error, data) => {
         }
         console.log('Updated file successfully');
     });
+
 });

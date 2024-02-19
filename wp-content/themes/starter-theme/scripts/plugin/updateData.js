@@ -4,7 +4,7 @@ module.exports.update = (data, action, prop, plugin, version, must_use = false) 
 
     if(prop == "require") {
 
-        action == 'require' ? Object.assign({}, data.require, { [wpackagist]: version }) : delete data.require[wpackagist];
+        action == 'require' ? Object.assign(data.require, { [wpackagist]: version }) : delete data.require[wpackagist];
         return data;
 
     } else {
@@ -12,15 +12,23 @@ module.exports.update = (data, action, prop, plugin, version, must_use = false) 
         if(must_use)
         {
             let dataArray = data.extra['installer-paths']['../../mu-plugins/{$name}/'];
-            dataArray = action == 'require' ? dataArray.push(wpackagist) : dataArray.filter(x => x !== wpackagist);
-            data.extra['installer-paths']['../../mu-plugins/{$name}/'] = dataArray;
+            if (action == 'require') {
+                dataArray.push(wpackagist)
+            } else {
+                dataArray = dataArray.filter(x => x !== wpackagist);
+                data.extra['installer-paths']['../../mu-plugins/{$name}/'] = dataArray;
+            }
             return data;
         }
         else
         {
             let dataArray = data.extra['installer-paths']['../../plugins/{$name}/'];
-            dataArray = action == 'require' ? dataArray.push(wpackagist) : dataArray.filter(x => x !== wpackagist);
-            data.extra['installer-paths']['../../plugins/{$name}/'] = dataArray;
+            if (action == 'require') {
+                dataArray.push(wpackagist)
+            } else {
+                dataArray = dataArray.filter(x => x !== wpackagist);
+                data.extra['installer-paths']['../../plugins/{$name}/'] = dataArray;
+            }
             return data;
         }
 
