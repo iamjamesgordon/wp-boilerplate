@@ -5,6 +5,7 @@ const composer = path.resolve(__dirname, '../../composer.json');
 
 const { check } = require('./checker');
 const { update } = require('./updateData');
+const { remove } = require('./removeFile');
 
 const action = process.argv[2];
 const plugin = process.argv[3];
@@ -47,12 +48,18 @@ readFile(composer, (error, data) => {
         // Check if plugin exists in the installer-path must use
         // If it does then do update the json by removing from installer-path mu-plugin
         if(check(parsedData, false, plugin, true))
+        {
             parsedData = update(parsedData, action, '', plugin, '', true);
+            remove(plugin, true);
+        }
 
         // Check if plugin exists in the installer-path
         // If it does then do update the json by removing from installer-path plugin
         if (check(parsedData, false, plugin, false))
+        {
             parsedData = update(parsedData, action, '', plugin, '', false);
+            remove(plugin, false);
+        }
 
     }
 

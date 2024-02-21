@@ -35,7 +35,8 @@ while getopts ":t:p:v:ma" option; do
   esac
 done
 
-if [ -z "$task" ] || [ -z "$plugin_name" ] || [ -z "$version" ]; then
+if [ $task == "require" ] && [ -z "$version" ]; then
+        echo 'When using 'Require' please make sure to set a plugin and a version'
         echo 'Missing -t, -p or -v'
         echo $usage
         exit 1
@@ -49,17 +50,28 @@ package_exist() {
 # Add a check to see if package exist in packagist before trying to execute node function
 if package_exist; then
 
-  echo "This package does exist"
-  node $(dirname $0)/plugin/index.js $task $plugin_name $version $must_use
+  if [ "$task" = "remove" ]; then
 
-  if [ $activate ]; then
-    echo "The $plugin_name would have been activated"
-  else
-    echo "The $plugin_name would not have been activated"
+    docker exec $wordpressContainer bash -ilc "wp plugin deactivate $plugin_name"
+    docker exec $wordpressContainer bash -ilc "wp plugin delete $plugin_name"
+
+  fi
+
+    echo "This package does exist"
+    node $(dirname $0)/plugin/index.js $task $plugin_name $version $must_use
+    composer update
+    composer install
+
+  if [ "$activate" = "true" ] && [ -z "$must_use" ]; then
+
+    docker exec $wordpressContainer bash -ilc "wp plugin activate $plugin_name"
+
   fi
 
 else
+
   echo "This package doesn't exist"
   echo "Please check https://wpackagist.org/ to see if the plugin and version is correct"
   exit 1
+
 fi
