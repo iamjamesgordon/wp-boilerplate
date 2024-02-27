@@ -1,0 +1,29 @@
+name: WP Boilerplate Theme Test and Lint
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    working-directory: wp-content/themes/starter-theme
+
+jobs:
+  boilerplate_lint_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: Setup PHP v 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: Check PHP Version
+        run: php -v
+      - name: Test command
+        run: ls -l
+      - name: Install Composer
+        run: |
+          composer update
+          composer install
+      - name: Run Tests
+        run: ./vendor/bin/phpunit tests
+      - name: Check linting
+        run: ./vendor/bin/php-cs-fixer fix --dry-run -vvv
