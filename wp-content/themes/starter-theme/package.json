@@ -1,0 +1,39 @@
+{
+  "name": "starter-theme",
+  "version": "1.0.0",
+  "description": "This is a starter theme using roots/sage w webpack",
+  "author": "James Gordon",
+  "license": "1.0.0",
+  "keywords": [
+    "WordPress",
+    "Theme"
+  ],
+  "homepage": "https://github.com/iamjamesgordon/wp-boilerplate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamjamesgordon/wp-boilerplate.git"
+  },
+  "devDependencies": {
+    "css-loader": "6.9.0",
+    "css-minimizer-webpack-plugin": "5.0.1",
+    "mini-css-extract-plugin": "2.7.7",
+    "node-sass": "9.0.0",
+    "npm-watch": "0.11.0",
+    "sass": "1.69.7",
+    "sass-loader": "13.3.3",
+    "webpack": "5.89.0",
+    "webpack-assets-manifest": "^5.1.0",
+    "webpack-cli": "5.1.4"
+  },
+  "watch": {
+    "build": {
+      "patterns": "resources/assets",
+      "extensions": "js,scss"
+    }
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js && node scripts/html-generator",
+    "html": "node scripts/html-generator",
+    "watch": "npm-watch build"
+  }
+}
