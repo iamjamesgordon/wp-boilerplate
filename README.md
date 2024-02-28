@@ -60,7 +60,7 @@ For testing access the starter-theme folder and run the command below in the com
 To format the php code and apply consistency to the formatting, access the starter-theme folder
 - script/linting.sh
 
-## WordPress Docker Container - WP-CLU
+## WordPress Docker Container - WP-CLI
 To be able to run the commands necessary for the Roots/Acorn you need to access the WordPress docker container. Run the command below in the root of the repo.
 - script/wp-cli.sh
 - The necessary Roots/Acorn commands are here - https://roots.io/acorn/docs/wp-cli/
