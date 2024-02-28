@@ -6,13 +6,12 @@ use Illuminate\Support\ServiceProvider;
 
 class AssetsProvider extends ServiceProvider
 {
-
     protected $ManifestPath;
     protected $ManifestFile;
 
     public function __construct()
     {
-        $this->ManifestFile = json_decode(file_get_contents(get_stylesheet_directory(). "/public/manifest.json"),true);
+        $this->ManifestFile = json_decode(file_get_contents(get_stylesheet_directory(). "/public/manifest.json"), true);
         $this->ManifestPath = dirname(get_stylesheet_directory_uri(). "/public/manifest.json");
     }
 
@@ -23,7 +22,7 @@ class AssetsProvider extends ServiceProvider
      */
     public function register()
     {
-        add_action( 'wp_enqueue_scripts', [$this, 'enqueueScripts'] );
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
     }
 
     /**
