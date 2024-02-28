@@ -53,7 +53,7 @@ Each variable under the **Docker Variables** header should be set
 For consistency and simplifying the development experience scripts have been created for the regular tasks.
 
 ## Testing
-For testing access the starter-theme folder and run the command below in the command line. This will access all the tests in the tests/ folder with the ext spec.php
+For testing access the starter-theme folder and run the command below in the command line. This will access all the tests in the tests/ folder with the suffix Test.php
 - script/tests.sh
 
 ## Linting
