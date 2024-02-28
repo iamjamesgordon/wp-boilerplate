@@ -1,2 +1,2 @@
 #!/bin/bash
-./vendor/bin/php-cs-fixer fix app/
+./vendor/bin/php-cs-fixer fix
